@@ -1,12 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SiteShell } from "@/components/site-shell";
+import { artworks, formatPrice } from "@/lib/artworks";
 
-const featuredWorks = [
-  { title: "Sunlit Bloom", detail: "Mixed media / 90 x 90 cm" },
-  { title: "Night Drift", detail: "Acrylic on canvas / 120 x 90 cm" },
-  { title: "Quiet Geometry", detail: "Ink and pigment / 80 x 80 cm" },
-];
+const featuredWorks = artworks.slice(0, 3);
 
 export default function Home() {
   return (
@@ -45,8 +42,8 @@ export default function Home() {
             <div className="relative overflow-hidden rounded-[2rem] border border-black/10 bg-white p-3 shadow-[0_30px_70px_rgba(0,0,0,0.08)]">
               <div className="relative overflow-hidden rounded-[1.5rem]">
                 <Image
-                  src="/bg-1.jpg"
-                  alt="Featured artwork from TwalaWorks"
+                  src={featuredWorks[0].image}
+                  alt={featuredWorks[0].title}
                   width={900}
                   height={1200}
                   priority
@@ -71,22 +68,19 @@ export default function Home() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {featuredWorks.map((work, index) => (
-            <article key={work.title} className="overflow-hidden border border-black/10 bg-white shadow-[0_18px_50px_rgba(0,0,0,0.03)]">
-              <div
-                className="h-72 bg-cover bg-center"
-                style={{
-                  backgroundImage:
-                    index === 0
-                      ? "url('/bg-1.jpg')"
-                      : index === 1
-                        ? "url('/bg-2.jpg')"
-                        : "linear-gradient(rgba(0,0,0,0.08), rgba(0,0,0,0.08)), url('/logo.jpg')",
-                }}
-              />
+          {featuredWorks.map((work) => (
+            <article key={work.slug} className="overflow-hidden border border-black/10 bg-white shadow-[0_18px_50px_rgba(0,0,0,0.03)]">
+              <Link href={`/gallery/${work.slug}`} className="block">
+                <div className="relative h-72 bg-[#e9e2d8]">
+                  <Image src={work.image} alt={work.title} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
+                </div>
+              </Link>
               <div className="space-y-2 p-5">
                 <h3 className="font-serif text-3xl tracking-[-0.05em]">{work.title}</h3>
-                <p className="text-sm leading-6 text-[color:var(--muted)]">{work.detail}</p>
+                <p className="text-sm leading-6 text-[color:var(--muted)]">
+                  {work.medium} / {work.originalSize ?? "Prints available"}
+                </p>
+                {work.originalPrice && <p className="text-sm font-medium">From {formatPrice(work.originalPrice)}</p>}
               </div>
             </article>
           ))}
