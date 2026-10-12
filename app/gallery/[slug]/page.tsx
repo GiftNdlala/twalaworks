@@ -19,7 +19,7 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
   return (
     <SiteShell>
       <section className="mx-auto grid max-w-7xl gap-10 px-5 py-12 md:grid-cols-[1.05fr_0.95fr] md:px-8 md:py-16">
-        <div className="relative min-h-[520px] overflow-hidden bg-[#e9e2d8] md:min-h-[720px]">
+        <div className="art-grain relative min-h-[520px] overflow-hidden bg-[#e9e2d8] md:min-h-[720px]">
           <Image
             src={artwork.image}
             alt={artwork.title}
@@ -28,13 +28,14 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
             className="object-contain"
             priority
           />
+          <span className="absolute left-5 top-5 bg-[color:var(--paper)]/90 px-3 py-2 text-[10px] uppercase tracking-[0.18em]">Studio archive</span>
         </div>
 
         <div className="flex flex-col justify-center">
           <Link href="/gallery" className="mb-8 text-xs uppercase tracking-[0.2em] text-[color:var(--muted)]">
             ← Back to gallery
           </Link>
-          <p className="mb-3 text-xs uppercase tracking-[0.28em] text-[color:var(--muted)]">Original work</p>
+          <p className="art-index mb-3">Original work / studio archive</p>
           <h1 className="font-serif text-5xl leading-none tracking-[-0.06em] md:text-7xl">{artwork.title}</h1>
           <dl className="mt-8 grid gap-5 border-y border-black/10 py-6 text-sm">
             {artwork.originalSize && (

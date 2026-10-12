@@ -13,10 +13,10 @@ const navItems = [
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-[color:var(--paper)] text-[color:var(--ink)]">
-      <header className="sticky top-0 z-50 border-b border-black/10 bg-[color:var(--paper)]/90 backdrop-blur-sm">
+      <header className="sticky top-0 z-50 border-b border-black/10 bg-[color:var(--paper)]/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 md:px-8">
-          <Link href="/" className="flex items-center gap-3 text-left">
-            <div className="overflow-hidden rounded-full border border-black/20 bg-white p-1 shadow-sm">
+          <Link href="/" className="group flex items-center gap-3 text-left">
+            <div className="relative overflow-hidden rounded-full border border-black/20 bg-white p-1 shadow-sm transition-transform duration-500 group-hover:rotate-6">
               <Image
                 src="/logo.jpg"
                 alt="TwalaWorks logo"
@@ -40,25 +40,39 @@ export function SiteShell({ children }: { children: ReactNode }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm uppercase tracking-[0.18em] text-[color:var(--muted)] transition-colors hover:text-[color:var(--ink)]"
+                className="group relative text-sm uppercase tracking-[0.18em] text-[color:var(--muted)] transition-colors hover:text-[color:var(--ink)]"
               >
                 {item.label}
+                <span className="absolute -bottom-2 left-0 h-px w-0 bg-[color:var(--gold)] transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
           </nav>
 
+          <details className="relative md:hidden">
+            <summary className="cursor-pointer list-none rounded-full border border-black/15 px-4 py-2 text-xs uppercase tracking-[0.2em] text-[color:var(--muted)]">
+              Menu
+            </summary>
+            <div className="absolute right-0 top-12 z-10 w-48 border border-black/10 bg-[color:var(--paper)] p-3 shadow-[0_18px_50px_rgba(0,0,0,0.12)]">
+              {navItems.map((item) => (
+                <Link key={item.href} href={item.href} className="block px-3 py-3 text-xs uppercase tracking-[0.18em] text-[color:var(--muted)] hover:bg-black/5 hover:text-[color:var(--ink)]">
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </details>
+
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center rounded-full border border-[color:var(--ink)] bg-[color:var(--ink)] px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-white transition-colors hover:bg-transparent hover:text-[color:var(--ink)]"
+            className="hidden items-center justify-center rounded-full border border-[color:var(--ink)] bg-[color:var(--ink)] px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-white transition-colors hover:bg-transparent hover:text-[color:var(--ink)] sm:inline-flex"
           >
-            Book a viewing
+            Enquire
           </Link>
         </div>
       </header>
 
       <main>{children}</main>
 
-      <footer className="border-t border-black/10 bg-[#f3efe8]">
+      <footer className="art-grain border-t border-black/10 bg-[#f3efe8]">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-10 md:grid-cols-3 md:px-8">
           <div>
             <div className="mb-3 font-serif text-3xl tracking-[-0.05em]">TwalaWorks</div>

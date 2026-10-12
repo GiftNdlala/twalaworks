@@ -8,14 +8,12 @@ const featuredWorks = artworks.slice(0, 3);
 export default function Home() {
   return (
     <SiteShell>
-      <section className="relative overflow-hidden bg-[color:var(--paper)]">
+      <section className="art-grain relative overflow-hidden bg-[color:var(--paper)]">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 md:grid-cols-[1.05fr_0.95fr] md:items-center md:px-8 md:py-16">
           <div className="order-2 md:order-1">
-            <p className="mb-5 text-xs uppercase tracking-[0.3em] text-[color:var(--muted)]">
-              Contemporary art by Thando Twala
-            </p>
+            <p className="art-index mb-5">01 / Johannesburg studio</p>
             <h1 className="max-w-xl text-5xl leading-[0.9] tracking-[-0.06em] text-[color:var(--ink)] md:text-7xl">
-              Original works with presence, texture and soul.
+              Original works with <span className="text-[color:var(--gold)]">presence</span>, texture and soul.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-[color:var(--muted)]">
               TwalaWorks curates expressive contemporary pieces for collectors, thoughtful spaces,
@@ -36,10 +34,16 @@ export default function Home() {
                 Book a viewing
               </Link>
             </div>
+
+            <div className="mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-black/10 pt-5 text-[10px] uppercase tracking-[0.18em] text-[color:var(--muted)]">
+              <div><span className="mb-2 block text-[color:var(--ink)]">01</span>Collect</div>
+              <div><span className="mb-2 block text-[color:var(--ink)]">02</span>Connect</div>
+              <div><span className="mb-2 block text-[color:var(--ink)]">03</span>Commission</div>
+            </div>
           </div>
 
           <div className="order-1 md:order-2">
-            <div className="relative overflow-hidden rounded-[2rem] border border-black/10 bg-white p-3 shadow-[0_30px_70px_rgba(0,0,0,0.08)]">
+            <div className="gentle-drift relative overflow-hidden rounded-[2rem] border border-black/10 bg-white p-3 shadow-[0_30px_70px_rgba(0,0,0,0.08)]">
               <div className="relative overflow-hidden rounded-[1.5rem]">
                 <Image
                   src={featuredWorks[0].image}
@@ -50,16 +54,23 @@ export default function Home() {
                   className="h-[540px] w-full object-cover md:h-[650px]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+                <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
+                  <div>
+                    <p className="mb-1 text-[10px] uppercase tracking-[0.22em] text-white/70">Featured work</p>
+                    <p className="font-serif text-2xl">{featuredWorks[0].title}</p>
+                  </div>
+                  <span className="text-xs uppercase tracking-[0.18em] text-white/70">01 / 12</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-16 md:px-8">
+      <section className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-24">
         <div className="mb-10 flex items-end justify-between gap-6">
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.28em] text-[color:var(--muted)]">Featured</p>
+            <p className="art-index mb-3">02 / Selected works</p>
             <h2 className="font-serif text-5xl leading-none tracking-[-0.05em] md:text-6xl">Signature works</h2>
           </div>
           <Link href="/gallery" className="hidden text-sm uppercase tracking-[0.2em] text-[color:var(--muted)] md:inline-block">
@@ -69,10 +80,11 @@ export default function Home() {
 
         <div className="grid gap-6 md:grid-cols-3">
           {featuredWorks.map((work) => (
-            <article key={work.slug} className="overflow-hidden border border-black/10 bg-white shadow-[0_18px_50px_rgba(0,0,0,0.03)]">
+            <article key={work.slug} className="group overflow-hidden border border-black/10 bg-white shadow-[0_18px_50px_rgba(0,0,0,0.03)] transition-transform duration-500 hover:-translate-y-2">
               <Link href={`/gallery/${work.slug}`} className="block">
-                <div className="relative h-72 bg-[#e9e2d8]">
+                <div className="relative h-72 overflow-hidden bg-[#e9e2d8]">
                   <Image src={work.image} alt={work.title} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
+                  <span className="absolute left-4 top-4 bg-[color:var(--paper)]/90 px-3 py-2 text-[10px] uppercase tracking-[0.18em]">0{featuredWorks.indexOf(work) + 1} / 03</span>
                 </div>
               </Link>
               <div className="space-y-2 p-5">
@@ -87,14 +99,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#f1eadf] py-16">
+      <section className="art-grain bg-[#f1eadf] py-20 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-[0.95fr_1.05fr] md:px-8">
-          <div className="rounded-[2rem] border border-black/10 bg-white p-4 shadow-[0_18px_40px_rgba(0,0,0,0.04)]">
+          <div className="relative rounded-[2rem] border border-black/10 bg-white p-4 shadow-[0_18px_40px_rgba(0,0,0,0.04)]">
             <Image src="/logo.jpg" alt="TwalaWorks signature mark" width={700} height={700} className="h-full w-full rounded-[1.5rem] object-cover" />
+            <span className="absolute bottom-8 left-8 bg-[color:var(--ink)] px-4 py-3 text-[10px] uppercase tracking-[0.2em] text-white">Made in Johannesburg</span>
           </div>
 
           <div className="flex flex-col justify-center">
-            <p className="mb-3 text-xs uppercase tracking-[0.28em] text-[color:var(--muted)]">Artist ethos</p>
+            <p className="art-index mb-3">03 / Artist ethos</p>
             <h2 className="font-serif text-5xl leading-none tracking-[-0.05em] md:text-6xl">
               A practice rooted in movement, feeling and material.
             </h2>
